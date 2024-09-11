@@ -25,7 +25,19 @@ function loginPage() {
           </form>
         </div>
     `;
+    document.getElementById('login-container').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+    if (username === hardUsername && password === hardPassword) {
+      welcomePage();
+    } else {
+      errorPage();
+    }
+    });
   
 }
 
-loginPage();
+  loginPage();

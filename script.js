@@ -40,4 +40,23 @@ function loginPage() {
   
 }
 
+function welcomePage () {
+  document.getElementById ('page').innerHTML = `
+  <p>Välkommen till Pengabingen.</p>
+  <Button id="logoutButton" type="submit">Logga ut</button>
+  `
+  document.getElementById('logoutButton').addEventListener('click', function () {
+    loginPage();
+  })
+}
+
+function errorPage () {
+  document.getElementById ('page').innerHTML = `
+  <p>Fel användarnamn och lösenord! Försök igen.</p>
+  <Button id="backButton" type="submit">Tillbaka</button>
+  `;
+  document.getElementById('backButton').addEventListener('click', function() {
+    loginPage();
+  })
+}
   loginPage();

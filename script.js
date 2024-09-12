@@ -1,62 +1,121 @@
+// Hårdkodat Användarnamn och lösenord //
 const hardUsername = "test";
 const hardPassword = "1234";
 
+// Funktionen innehåller inloggningssidans HTML innehåll, och en funktion som lyssnar på om logga in knappen submitas //
+// Är innehållet i inputrutorna = "test" och "1234" kommer man till välkomstsidan, annars får man en errorsida //
 function loginPage() {
-    document.getElementById('page').innerHTML = `
-        <div id="login-container">
-           <h1>Logga in</h1>
-           <form>
+  const page = document.getElementById('page');
+  page.innerHTML= '';
 
-            <div class="userpassword-field">
+  const loginContainer = document.createElement('div');
+  loginContainer.id = 'login-container';
 
-              <div class="user-field">
-                   <input type="text" placeholder="Användarnamn" id="username" required><br><br>
-              </div>
+  const header = document.createElement('h1');
+  header.textContent = 'Logga in';
 
-              <div class="password-field">
-                   <input type="password" placeholder="Lösenord" id="password" required><br><br>
-              </div>
+  const form = document.createElement('form');
 
-            </div>
+  const usernameInput = document.createElement('input');
+  usernameInput.type = 'text';
+  usernameInput.placeholder = 'Användarnamn';
+  usernameInput.id = 'username';
+  usernameInput.required = true;
 
-            <div class="loginButton">  
-              <button type="submit">Logga in</button>
-            </div>
-          </form>
-        </div>
-    `;
-    document.getElementById('login-container').addEventListener('submit', function (e) {
+  const passwordInput = document.createElement('input');
+  passwordInput.type = 'password';
+  passwordInput.placeholder = 'Lösenord';
+  passwordInput.id = 'password';
+  passwordInput.required = true;
+
+  const loginButton = document.createElement('button');
+  loginButton.type = 'submit';
+  loginButton.classList.add = 'loginButton'
+  loginButton.textContent = 'Logga in';
+
+  form.appendChild(usernameInput);
+  form.appendChild(document.createElement('br'));
+  form.appendChild(document.createElement('br'));
+  form.appendChild(passwordInput);
+  form.appendChild(document.createElement('br'));
+  form.appendChild(document.createElement('br'));
+  form.appendChild(loginButton);
+
+  loginContainer.appendChild(header);
+  loginContainer.appendChild(form);
+
+  page.appendChild(loginContainer);
+
+  form.addEventListener('submit', function (e) {
       e.preventDefault();
 
       const username = document.getElementById('username').value;
       const password = document.getElementById('password').value;
 
-    if (username === hardUsername && password === hardPassword) {
-      welcomePage();
-    } else {
-      errorPage();
-    }
-    });
-  
+      if (username === hardUsername && password === hardPassword) {
+          welcomePage();
+      } else {
+          errorPage();
+      }
+  });
 }
 
-function welcomePage () {
-  document.getElementById ('page').innerHTML = `
-  <p>Välkommen till Pengabingen.</p>
-  <Button id="logoutButton" type="submit">Logga ut</button>
-  `
-  document.getElementById('logoutButton').addEventListener('click', function () {
-    loginPage();
-  })
+// Detta är välkomstsidan och innehåller HTML för välkomstsidan och en funktion där man återgår till inloggningssidan om logga ut knappen klickas // 
+function welcomePage() {
+  const page = document.getElementById('page');
+  page.innerHTML= '';
+
+  const welcomeContainer = document.createElement('div');
+  welcomeContainer.id = 'welcome-container';
+
+  const welcomeText = document.createElement('h1');
+  welcomeText.textContent = 'Välkommen in till mig!';
+
+  const logoutButton = document.createElement('button');
+  logoutButton.id = 'logoutButton';
+  logoutButton.type = 'submit';
+  logoutButton.textContent = 'Logga ut';
+
+  welcomeContainer.appendChild(welcomeText);
+  welcomeContainer.appendChild(logoutButton);
+
+  page.appendChild(welcomeContainer);
+
+  logoutButton.addEventListener('click', function () {
+      loginPage();
+  });
 }
 
-function errorPage () {
-  document.getElementById ('page').innerHTML = `
-  <p>Fel användarnamn och lösenord! Försök igen.</p>
-  <Button id="backButton" type="submit">Tillbaka</button>
-  `;
-  document.getElementById('backButton').addEventListener('click', function() {
-    loginPage();
-  })
+// Errorsidan innehåller HTML för errorsidan och en funktion där man kommer tillbaka till inloggningssidan på ett knapptryck vid fel användarnamn och lösenord //
+function errorPage() {
+  const page = document.getElementById('page');
+  page.innerHTML= '';
+
+  const errorContainer = document.createElement('div');
+  errorContainer.id = 'error-container';
+
+  const errorHeader = document.createElement('h2');
+  errorHeader.textContent = 'Något gick snett!'
+
+  const errorMessage = document.createElement('p');
+  errorMessage.textContent = 'Fel användarnamn och lösenord! Försök igen.';
+
+  const backButton = document.createElement('button');
+  backButton.id = 'backButton';
+  backButton.type = 'submit';
+  backButton.textContent = 'Tillbaka';
+
+  errorContainer.appendChild(errorHeader);
+  errorContainer.appendChild(document.createElement('br'));
+  errorContainer.appendChild(errorMessage);
+  errorContainer.appendChild(document.createElement('br'));
+  errorContainer.appendChild(backButton);
+
+  page.appendChild(errorContainer);
+
+  backButton.addEventListener('click', function () {
+      loginPage();
+  });
 }
-  loginPage();
+
+loginPage();

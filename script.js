@@ -2,8 +2,22 @@
 const hardUsername = "test";
 const hardPassword = "1234";
 
+// Funktionen kollar om localStorage har sparat inloggningen, om den är sparad så kommer man till välkomstsidan //
+// Är funktionen inte sparad kommer man till inloggningssidan. Sen efter funktionen så kollar den om localstorage sparat inLoggad eller inte //
+
+function checkLogin () {
+  const inLoggad = localStorage.getItem ('inLoggad');
+   if (inLoggad === 'true') {
+  welcomePage();
+  } else {
+  loginPage();
+  }
+}
+checkLogin();
+
 // Funktionen innehåller inloggningssidans HTML innehåll, och en funktion som lyssnar på om logga in knappen submitas //
-// Är innehållet i inputrutorna = "test" och "1234" kommer man till välkomstsidan, annars får man en errorsida //
+// Är innehållet i inputrutorna = "test" och "1234" kommer man till välkomstsidan, annars får man en errorsida. Inloggningen sparas också i localstorage //
+
 function loginPage() {
   const page = document.getElementById('page');
   page.innerHTML= '';
@@ -53,6 +67,7 @@ function loginPage() {
       const password = document.getElementById('password').value;
 
       if (username === hardUsername && password === hardPassword) {
+          localStorage.setItem('inLoggad', 'true');
           welcomePage();
       } else {
           errorPage();
@@ -60,7 +75,8 @@ function loginPage() {
   });
 }
 
-// Detta är välkomstsidan och innehåller HTML för välkomstsidan och en funktion där man återgår till inloggningssidan om logga ut knappen klickas // 
+// Detta är välkomstsidan och innehåller HTML för välkomstsidan och en funktion där man återgår till inloggningssidan om logga ut knappen klickas //
+// Logga ut knappen tar också bort inLoggad ur local storage, så inloggningen inte är sparad tills sidan besöks igen //
 function welcomePage() {
   const page = document.getElementById('page');
   page.innerHTML= '';
@@ -82,6 +98,7 @@ function welcomePage() {
   page.appendChild(welcomeContainer);
 
   logoutButton.addEventListener('click', function () {
+      localStorage.removeItem('inLoggad');
       loginPage();
   });
 }
@@ -117,5 +134,3 @@ function errorPage() {
       loginPage();
   });
 }
-
-loginPage();

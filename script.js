@@ -44,7 +44,6 @@ function loginPage() {
 
   const loginButton = document.createElement('button');
   loginButton.type = 'submit';
-  loginButton.classList.add = 'loginButton'
   loginButton.textContent = 'Logga in';
 
   form.appendChild(usernameInput);

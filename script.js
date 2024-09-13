@@ -3,7 +3,7 @@ const hardUsername = "test";
 const hardPassword = "1234";
 
 // Funktionen kollar om localStorage har sparat inloggningen, om den är sparad så kommer man till välkomstsidan //
-// Är funktionen inte sparad kommer man till inloggningssidan. Sen efter funktionen så kollar den om localstorage sparat inLoggad eller inte //
+// Är inloggningen inte sparad i localStorage så kommer man till inloggningssidan //
 
 function checkLogin () {
   const inLoggad = localStorage.getItem ('inLoggad');

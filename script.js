@@ -87,7 +87,6 @@ function welcomePage() {
   welcomeText.textContent = 'Välkommen in till mig!';
 
   const logoutButton = document.createElement('button');
-  logoutButton.id = 'logoutButton';
   logoutButton.type = 'submit';
   logoutButton.textContent = 'Logga ut';
 
@@ -117,7 +116,6 @@ function errorPage() {
   errorMessage.textContent = 'Fel användarnamn och lösenord! Försök igen.';
 
   const backButton = document.createElement('button');
-  backButton.id = 'backButton';
   backButton.type = 'submit';
   backButton.textContent = 'Tillbaka';
 
